@@ -58,11 +58,6 @@ class TGBot:
             await update.message.reply_text(text=f'Твой Telegram ID: {user_id}')
 
     async def trello_handler(self, update: Update, context: CallbackContext):
-        print('huy')
-        if str(update.callback_query.message.chat_id) in self.accepted_ids:
-            print(update.callback_query.data)
-            if update.callback_query.data == 'Trello>>':
-                reply_markup = ReplyKeyboardMarkup(TRELLO_KEYBOARD)
-                await update.callback_query.message.reply_text(text='Choice action', reply_markup=reply_markup)
-            elif update.callback_query.data == 'Show lists':
-                await update.callback_query.message.reply_text(self.trello.get_lists())
+        if str(update.message.chat.id) in self.accepted_ids:
+            reply_markup = ReplyKeyboardMarkup(TRELLO_KEYBOARD)
+            await update.message.reply_text(text='Choice action', reply_markup=reply_markup)
